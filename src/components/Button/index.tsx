@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, memo } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 
 export const Button: React.FC<InputHTMLAttributes<HTMLButtonElement>> = (
   props
