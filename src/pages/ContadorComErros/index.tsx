@@ -26,11 +26,11 @@ export const ContadorComErros = () => {
       setContador(contador + 1);
     } else {
       setErros((erros)=>[
-        ...erros,
         {
           id: faker.datatype.uuid(),
           erro: 'Contador não pode ser maior que dez',
         },
+        ...erros,
       ]);
     }
   }
@@ -40,11 +40,11 @@ export const ContadorComErros = () => {
       setContador(contador - 1);
     } else {
       setErros((erros)=>[
-        ...erros,
         {
           id: faker.datatype.uuid(),
           erro: 'Contador não pode ser menor que zero',
         },
+        ...erros,
       ]);
     }
   }

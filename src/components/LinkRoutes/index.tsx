@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { memo } from 'react'
 
-export const LinksRoutes = () => {
+export const LinksRoutes = memo(() => {
 
     return(
         <header className='@apply flex justify-center items-center gap-[25px] bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] text-lg text-[rgb(19,141,141)] px-2 py-4'>
@@ -12,4 +13,4 @@ export const LinksRoutes = () => {
         <Link to='/marketplace'>Marketplace</Link>
       </header>
     )
-}
+})
