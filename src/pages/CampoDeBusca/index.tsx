@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import { Combobox } from '@headlessui/react'
 import { GetUserResponse, Pessoa } from '../../types/Pessoa'
 import { ComboboxItens } from '../../components/ComboboxItens'
+import useDebounce from '../../hooks/useDebounce'
+import { LinksRoutes } from '../../components/LinkRoutes'
 
 export function CampoDeBusca() {
   const queryRef = useRef<string>()
   const [pessoas, setPessoas] = useState<Pessoa[]>([])
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const {debounce} = useDebounce(300)
 
   const buscaPessoas = async () => {
     setLoading(true)
@@ -31,12 +35,14 @@ export function CampoDeBusca() {
 
   useEffect(() => {
     if (query)
-      setPessoas((pessoas) =>
+      debounce(()=>setPessoas((pessoas) =>
         pessoas.filter((pessoa) => pessoa.name.first.includes(query))
-      )
+      ))
   }, [query])
 
   return (
+    <>
+    <LinksRoutes/>
     <div className='py-12 sm:px-6 lg:px-8'>
       <h1 className='text-center text-2xl mb-2 text-color text-purple-600'>{`${pessoas.length} registros encontrados`}</h1>
       <Combobox
@@ -55,5 +61,6 @@ export function CampoDeBusca() {
         <ComboboxItens query={query} pessoas={pessoas} loading={loading} />
       </Combobox>
     </div>
+    </>
   )
 }

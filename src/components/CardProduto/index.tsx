@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { classNames } from "../../helpers/classNames";
 import { formataMoeda } from "../../helpers/formatters";
 import { Produto } from "../../types/Produto";
@@ -7,7 +8,7 @@ type CardProdutoProps = {
   onClick: (produto: Produto) => void;
 }
 
-export const CardProduto: React.FC<CardProdutoProps> = ({
+export const CardProduto: React.FC<CardProdutoProps> = memo(({
   produto,
   onClick,
 }) => {
@@ -36,4 +37,4 @@ export const CardProduto: React.FC<CardProdutoProps> = ({
       </div>
     </li>
   );
-};
+})

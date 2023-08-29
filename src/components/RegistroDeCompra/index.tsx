@@ -1,11 +1,12 @@
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import { formataData, formataHora } from "../../helpers/formatters";
 import { Compra } from "../../types/Compra";
+import {memo} from 'react'
 
 interface RegistroDeCompraProps {
   compra: Compra;
 }
-export const RegistroDeCompra: React.FC<RegistroDeCompraProps> = ({ compra }) => {
+export const RegistroDeCompra: React.FC<RegistroDeCompraProps> = memo(({ compra }) => {
   return (
     <div className="bg-gray-50 shadow overflow-hidden sm:rounded-md my-2">
       <ul className="divide-y divide-gray-200">
@@ -49,4 +50,4 @@ export const RegistroDeCompra: React.FC<RegistroDeCompraProps> = ({ compra }) =>
       </ul>
     </div>
   )
-};
+})

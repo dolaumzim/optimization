@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { classNames } from "../../helpers/classNames";
+import { LinksRoutes } from "../../components/LinkRoutes";
 
 const colors: string[] = [
   'bg-gray-600',
@@ -48,6 +49,8 @@ export const ColorResponsive = () => {
 
   console.log('==== re-render')
   return (
+    <>
+    <LinksRoutes/>
     <div className={
       classNames(
         color,
@@ -58,5 +61,6 @@ export const ColorResponsive = () => {
         { color.replace('bg-', '').replace('-600', '') }
       </p>
     </div>
+    </>
   );
 }

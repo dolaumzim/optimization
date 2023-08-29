@@ -19,7 +19,7 @@ export const ComboboxItens: React.FC<ComboboxItensProps> = ({
   }
 
   if (query && pessoas.length === 0) {
-    <ResultadosNaoEncontrados />
+    return <ResultadosNaoEncontrados />
   }
 
   return (
