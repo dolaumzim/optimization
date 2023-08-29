@@ -3,6 +3,7 @@ import { Combobox } from '@headlessui/react'
 import { GetUserResponse, Pessoa } from '../../types/Pessoa'
 import { ComboboxItens } from '../../components/ComboboxItens'
 import useDebounce from '../../hooks/useDebounce'
+import { LinksRoutes } from '../../components/LinkRoutes'
 
 export function CampoDeBusca() {
   const queryRef = useRef<string>()
@@ -40,6 +41,8 @@ export function CampoDeBusca() {
   }, [query])
 
   return (
+    <>
+    <LinksRoutes/>
     <div className='py-12 sm:px-6 lg:px-8'>
       <h1 className='text-center text-2xl mb-2 text-color text-purple-600'>{`${pessoas.length} registros encontrados`}</h1>
       <Combobox
@@ -58,5 +61,6 @@ export function CampoDeBusca() {
         <ComboboxItens query={query} pessoas={pessoas} loading={loading} />
       </Combobox>
     </div>
+    </>
   )
 }

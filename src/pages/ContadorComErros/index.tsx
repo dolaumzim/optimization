@@ -1,15 +1,16 @@
 import faker from "@faker-js/faker";
-import { useEffect, useState } from "react";
+import { useState, memo} from "react";
 import { Button } from "../../components/Button";
+import { LinksRoutes } from "../../components/LinkRoutes";
 
-const Error: React.FC = ({ children }) => {
+const Error: React.FC = memo(({ children }) => {
   console.log('===== renderiza erro', children);
   return (
     <h1 className="text-center text-red-500 text-base font-medium">
       { children }
     </h1>
   )
-}
+})
 
 type ErroDoContador = {
   id: string;
@@ -20,37 +21,37 @@ export const ContadorComErros = () => {
   const [contador, setContador] = useState(0);
   const [erros, setErros] = useState<ErroDoContador[]>([]);
 
-  useEffect(() => {
-    if (contador < 0) {
-      setErros([
-        {
-          id: faker.datatype.uuid(),
-          erro: 'Contador não pode ser menor que zero',
-        },
+  const incrementa = () => {
+    if (contador < 10) {
+      setContador(contador + 1);
+    } else {
+      setErros((erros)=>[
         ...erros,
-      ]);
-    }
-
-    if (contador > 10) {
-      setErros([
         {
           id: faker.datatype.uuid(),
           erro: 'Contador não pode ser maior que dez',
         },
-        ...erros,
       ]);
     }
-  }, [contador]);
-
-  const incrementa = () => {
-    setContador(contador + 1);
   }
 
   const decrementa = () => {
-    setContador(contador - 1);
+    if (contador > 0) {
+      setContador(contador - 1);
+    } else {
+      setErros((erros)=>[
+        ...erros,
+        {
+          id: faker.datatype.uuid(),
+          erro: 'Contador não pode ser menor que zero',
+        },
+      ]);
+    }
   }
 
   return (
+    <>
+    <LinksRoutes/>
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10">
@@ -74,5 +75,38 @@ export const ContadorComErros = () => {
         }
       </div>
     </div>
+    </>
   );
 }
+
+
+
+//   useEffect(() => {
+//     if (contador < 0) {
+//       setErros([
+//         {
+//           id: faker.datatype.uuid(),
+//           erro: 'Contador não pode ser menor que zero',
+//         },
+//         ...erros,
+//       ]);
+//     }
+
+//     if (contador > 10) {
+//       setErros([
+//         {
+//           id: faker.datatype.uuid(),
+//           erro: 'Contador não pode ser maior que dez',
+//         },
+//         ...erros,
+//       ]);
+//     }
+//   }, [contador]);
+
+//   const incrementa = () => {
+//     setContador(contador + 1);
+//   }
+
+//   const decrementa = () => {
+//     setContador(contador - 1);
+//   }
