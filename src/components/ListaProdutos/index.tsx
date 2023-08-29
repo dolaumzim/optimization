@@ -4,6 +4,7 @@ import { geraPessoas } from "../../helpers/gera-pessoa";
 import { Compra } from "../../types/Compra";
 import { Produto } from "../../types/Produto";
 import { CardProduto } from "../CardProduto";
+import { useMemo } from "react";
 
 export const ListaProdutos = () => {
   const {
@@ -21,13 +22,13 @@ export const ListaProdutos = () => {
     }
   }
 
-  const comprarProduto = (produtoComprado: Produto) => {
+  const comprarProduto = useMemo(()=>(produtoComprado: Produto) => {
     if (produtoComprado.quantidade > 0) {
       produtoComprado.quantidade--;
       atualizaProduto(produtoComprado);
       adicionaCompra(registraCompra(produtoComprado));
     }
-  };
+  },[produtos])
 
   return (
     <div className="py-12 sm:px-6 lg:px-8 shadow-2xl my-5 rounded-2xl">
